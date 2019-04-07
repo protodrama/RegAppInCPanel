@@ -1,6 +1,6 @@
 param(
     [string]$AppName = "MyMessageBox",
-    [string]$Source = "D:\temp\Messagebox",
+    [string]$Source = ".\Messagebox",
     [string]$InstallLocation = "D:\MessageboxInstallation",
     [string]$DisplayIcon = "D:\MessageboxInstallation\MyIco.ico",
     [string]$Publisher = "JF",
@@ -8,6 +8,8 @@ param(
     [string]$UninstallScript = "UninstallMessagebox.ps1",
     [string]$WindowsRegistryString = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\"
 )
+
+Push-Location (Split-Path -Path $MyInvocation.MyCommand.Definition -Parent)
 
 #------------------------------------------------
 # App Installation steps
@@ -57,3 +59,5 @@ powershell.exe -File "${UninstallPath}\${UninstallScript}"
 "@
 
 New-ItemProperty -Path $AppRegistryPath -Name "UninstallString" -Value $UninstallString
+
+Pop-Location
