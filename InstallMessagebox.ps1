@@ -11,6 +11,7 @@ param(
 
 #------------------------------------------------
 # App Installation steps
+#------------------------------------------------
 
 # Remove installation folder if exist
 if(Test-Path($InstallLocation)){
